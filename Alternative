@@ -1,0 +1,54 @@
+-- Ensure the game is loaded
+if game:IsLoaded() then
+    print("Game is already loaded, executing script.")
+else
+    game.Loaded:Wait()
+end
+
+local GameP = game.PlaceId
+
+-- Function to send notifications
+local function sendNotification(title, text)
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Icon = "rbxassetid://13264701341"
+    })
+end
+
+-- Initial notifications
+sendNotification("GHP Hub", "Checking game...")
+wait(0.1)
+sendNotification("GHP Hub", "Checking PlaceId...")
+wait(0.1)
+
+-- Game specific logic
+local url
+
+if game.PlaceId == 17625359962 then  -- Rivals
+    sendNotification("GHP Hub", "Rivals [" .. GameP .. "]")
+    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r1"  -- Rivals GitHub link
+
+elseif game.PlaceId == 4483381587 then  -- Literal Baeplate
+    sendNotification("GHP Hub", "Literal Baeplate [" .. GameP .. "]")
+    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r2"  -- Literal Baeplate GitHub link
+
+else
+    sendNotification("GHP Hub", "Loading GHP Hub [" .. GameP .. "]")
+    url = "https://raw.githubusercontent.com/YOUR_GITHUB/GHP_Hub/main/script.lua"  -- General Hub script link
+end
+
+-- Load and execute the script from the URL
+if url then
+    local success, response = pcall(function()
+        return game:HttpGet(url)
+    end)
+
+    if success then
+        loadstring(response)()
+    else
+        sendNotification("Error", "Failed to load script from URL: " .. url)
+    end
+else
+    sendNotification("Error", "No URL found for the current game.")
+end
