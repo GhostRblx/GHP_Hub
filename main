@@ -61,6 +61,10 @@ elseif game.PlaceId == 4483381587 then  -- Literal Baeplate
     sendNotification("GHP Hub", "Literal Baeplate [" .. GameP .. "]")
     url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r2"  -- Literal Baeplate GitHub link
 
+elseif game.PlaceId == 286090429 then  -- Arsenal
+    sendNotification("GHP Hub", "Arsenal [" .. GameP .. "]")
+    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r3"  -- Arsenal GitHub link
+
 else
     sendNotification("GHP Hub", "Loading GHP Hub [" .. GameP .. "]")
     url = "https://raw.githubusercontent.com/YOUR_GITHUB/GHP_Hub/main/script.lua"  -- General Hub script link
