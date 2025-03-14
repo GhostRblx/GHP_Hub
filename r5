@@ -8,7 +8,7 @@ Rayfield:Notify({
 })
 
 local Window = Rayfield:CreateWindow({
-   Name = "Shoot people off a map 🔥",
+   Name = "Shoot people off a map ",
    LoadingTitle = "GHP Hub",
    LoadingSubtitle = "by GhostGamer",
    ConfigurationSaving = {
