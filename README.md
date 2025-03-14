@@ -2,13 +2,15 @@
 
 This repository contains the script loader for the GHP Hub, which allows you to load various scripts for games like **Rivals**, **Arsenal**, and more.
 
-**List of all current supported games:**
+**-all scripts are pretty new and still in Development-**
 
--Arsenal
-
--A literal Baseplate
-
--RIVALS
+**_List of all current supported games:_**
+    
+    -Arsenal
+    -A literal Baseplate
+    -RIVALS
+    -Tha Bronx 2/3
+    -Shoot People of a Map simulator
 
 ## Loadstring
 
