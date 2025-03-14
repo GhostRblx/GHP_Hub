@@ -16,7 +16,7 @@ local Window = Rayfield:CreateWindow({
       Invite = "https://discord.gg/FNCUVCvS", -- The actual Discord invite code for GHP Hub
       RememberJoins = true,
    },
-   KeySystem = true, -- Enable the key system
+   KeySystem = false, -- Enable the key system
    KeySettings = {
       Title = "GHP | Key System",
       Subtitle = "GHP Hub, The ultimate multi-experience Hub",
