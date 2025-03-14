@@ -1,5 +1,14 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+-- Function to send notifications
+local function sendNotification(title, text)
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = Script Executed,
+        Text = Loading,
+        Icon = "rbxassetid://13264701341"
+    })
+end
+
 local Window = Rayfield:CreateWindow({
    Name = "GHP Hub",
    LoadingTitle = "GHP V1",
@@ -38,8 +47,8 @@ local GameP = game.PlaceId
 -- Function to send notifications
 local function sendNotification(title, text)
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = title,
-        Text = text,
+        Title = Loaded,
+        Text = Finding Game,
         Icon = "rbxassetid://13264701341"
     })
 end
@@ -55,19 +64,27 @@ local url
 
 if game.PlaceId == 17625359962 then  -- Rivals
     sendNotification("GHP Hub", "Rivals [" .. GameP .. "]")
-    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r1"  -- Rivals GitHub link
+    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r1"  -- Rivals GitHub link = r1
 
 elseif game.PlaceId == 4483381587 then  -- Literal Baeplate
     sendNotification("GHP Hub", "Literal Baeplate [" .. GameP .. "]")
-    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r2"  -- Literal Baeplate GitHub link
+    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r2"  -- Literal Baeplate GitHub link = r2
 
 elseif game.PlaceId == 286090429 then  -- Arsenal
     sendNotification("GHP Hub", "Arsenal [" .. GameP .. "]")
-    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r3"  -- Arsenal GitHub link
+    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r3"  -- Arsenal GitHub link = r3
+
+elseif game.PlaceId == 16472538603 then  -- Arsenal
+    sendNotification("GHP Hub", "Tha Bronx 2/3 [" .. GameP .. "]")
+    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r4"  -- Tha Bronx 2/3 GitHub link = r4
+
+elseif game.PlaceId == 11124905486 then  -- Arsenal
+    sendNotification("GHP Hub", "Shoot Players Off A Map Simulator [" .. GameP .. "]")
+    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r35  -- Shoot Players Off A Map Simulator GitHub link = r5
 
 else
     sendNotification("GHP Hub", "Loading GHP Hub [" .. GameP .. "]")
-    url = "https://raw.githubusercontent.com/YOUR_GITHUB/GHP_Hub/main/script.lua"  -- General Hub script link
+    url = "https://raw.githubusercontent.com/YOUR_GITHUB/GHP_Hub/main/script.lua"  -- General Hub script link = main
 end
 
 -- Load and execute the script from the URL
