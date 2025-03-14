@@ -1,13 +1,6 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- Function to send notifications
-local function sendNotification(title, text)
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "Script Executed",
-        Text = "Loading",
-        Icon = "rbxassetid://13264701341"
-    })
-end
+
 
 local Window = Rayfield:CreateWindow({
    Name = "GHP Hub",
