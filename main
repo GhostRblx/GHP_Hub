@@ -3,8 +3,8 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 -- Function to send notifications
 local function sendNotification(title, text)
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = Script Executed,
-        Text = Loading,
+        Title = "Script Executed",
+        Text = "Loading",
         Icon = "rbxassetid://13264701341"
     })
 end
@@ -47,8 +47,8 @@ local GameP = game.PlaceId
 -- Function to send notifications
 local function sendNotification(title, text)
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = Loaded,
-        Text = Finding Game,
+        Title = "Loaded",
+        Text = "Finding Game",
         Icon = "rbxassetid://13264701341"
     })
 end
@@ -74,13 +74,13 @@ elseif game.PlaceId == 286090429 then  -- Arsenal
     sendNotification("GHP Hub", "Arsenal [" .. GameP .. "]")
     url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r3"  -- Arsenal GitHub link = r3
 
-elseif game.PlaceId == 16472538603 then  -- Arsenal
+elseif game.PlaceId == 16472538603 then  -- Tha Bronx 2/3
     sendNotification("GHP Hub", "Tha Bronx 2/3 [" .. GameP .. "]")
     url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r4"  -- Tha Bronx 2/3 GitHub link = r4
 
-elseif game.PlaceId == 11124905486 then  -- Arsenal
+elseif game.PlaceId == 11124905486 then  -- Shoot Players Off A Map Simulator
     sendNotification("GHP Hub", "Shoot Players Off A Map Simulator [" .. GameP .. "]")
-    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r35  -- Shoot Players Off A Map Simulator GitHub link = r5
+    url = "https://raw.githubusercontent.com/GhostRblx/Rivals1/refs/heads/main/r5"  -- Shoot Players Off A Map Simulator GitHub link = r5
 
 else
     sendNotification("GHP Hub", "Loading GHP Hub [" .. GameP .. "]")
