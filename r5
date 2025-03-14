@@ -63,10 +63,10 @@ local InfiniteJumpToggle = PlayerTab:CreateToggle({
    -- The variable (Value) is a boolean on whether the toggle is true or false
     if Value then
         _G.infinjump = true
-        game.StarterGui:SetCore("SendNotification", {Title="Youtube Hub"; Text="Infinite Jump Activated!"; Duration=5;})
+        game.StarterGui:SetCore("SendNotification", {Title="Active"; Text="Infinite Jump Activated!"; Duration=5;})
     else
         _G.infinjump = false
-        game.StarterGui:SetCore("SendNotification", {Title="Youtube Hub"; Text="Infinite Jump De-Activated!"; Duration=5;})
+        game.StarterGui:SetCore("SendNotification", {Title="Sleeping"; Text="Infinite Jump De-Activated!"; Duration=5;})
     end
 
 	--The actual infinite jump
@@ -97,10 +97,10 @@ local CashToggle = GameTab:CreateToggle({
    -- The variable (Value) is a boolean on whether the toggle is true or false
             if Value then
                 _G.AutoCollectCash = true
-                game.StarterGui:SetCore("SendNotification", {Title="Ventcore"; Text="Auto Collect Activated!"; Duration=5;})
+                game.StarterGui:SetCore("SendNotification", {Title="Active"; Text="Auto Collect Activated!"; Duration=5;})
             else
                 _G.AutoCollectCash = false
-                game.StarterGui:SetCore("SendNotification", {Title="Youtube Hub"; Text="Auto Collect De-Activated!"; Duration=5;})
+                game.StarterGui:SetCore("SendNotification", {Title="Sleeping"; Text="Auto Collect De-Activated!"; Duration=5;})
             end
 
             while wait() do
