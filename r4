@@ -1,0 +1,604 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+Rayfield:Notify({
+   Title = "Script Executed",
+   Content = "GHP Hub",
+   Duration = 5,
+   Image = 4483362458,
+   Actions = {
+      Ignore = {
+         Name = "GHP Hub",
+         Callback = function()
+      end
+   },
+},
+})
+
+local Window = Rayfield:CreateWindow({
+   Name = "Tha Bronx 2 Tools | GHP Hub",
+   LoadingTitle = "Tha Bronx 2 Tools",
+   LoadingSubtitle = "by GhostGamer",
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = scriptconfig,
+      FileName = "GHP_Tha_Bronx"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "",
+      RememberJoins = true
+   },
+   KeySystem = false,
+})
+
+--[[
+
+TODO:
+
+    https://www.youtube.com/watch?v=uPgJ06V9o8U
+
+
+    REWRITE THE WHOLE FUCKING RAYFIELD UI LIBRARY BECAUSE IT CANT FUCKING UPDATE A DROPDOWN MENU AND ARRAYFIELD LOOKS LIKE DOGSHIT
+
+    MAKE A LIST WITH ALL PLAYERS AND THEIR MONEY. IT CAN BE FOUND UNDER PLAYERS/USERNAME/STORED/money,dirtymoney,bank
+
+    make a button to hide all non searchable garbage
+
+    make a button to hide all noclipable fences
+
+    make a button to dump all inventory items to safe
+
+    make a button to remove all noclipable trees
+
+    make a button to remove all graffitis
+    workspace["1# Map"]:GetChildren()[436]
+
+    make a button to turn off camera bobbing
+
+    make a button to hide all warning tapes
+
+    make a button to toggle a selected gui from a list (can all be found in game:GetService("Players").LocalPlayer.PlayerGui)
+
+
+{
+	workspace["1# Map"]:GetChildren()[299]:GetChildren()[65],
+	workspace["1# Map"]:GetChildren()[299]:GetChildren()[51],
+	workspace["1# Map"]:GetChildren()[299]:GetChildren()[40],
+	workspace["1# Map"]:GetChildren()[299]:GetChildren()[22],
+	workspace["1# Map"]:GetChildren()[299]:GetChildren()[44],
+	workspace["1# Map"]:GetChildren()[299]:GetChildren()[45],
+	workspace["1# Map"]:GetChildren()[299]:GetChildren()[46],
+	workspace["1# Map"]:GetChildren()[299].TrashBag,
+	workspace["1# Map"]:GetChildren()[299]:GetChildren()[53],
+
+    workspace["1# Map"]["2 Meshes"].Meshess.garbage_carboard002a
+
+    {
+	workspace["1# Map"]:GetChildren()[71].garbage_carboard002a,
+	workspace["1# Map"]:GetChildren()[71]:GetChildren()[7],
+    }
+
+    {
+	workspace["1# Map"]:GetChildren()[97].garbage_carboard002a,
+	workspace["1# Map"]:GetChildren()[933],
+	workspace["1# Map"].garbage_carboard002a,
+	workspace["1# Map"]:GetChildren()[931],
+	workspace["1# Map"]:GetChildren()[929],
+	workspace["1# Map"]:GetChildren()[932],
+	workspace["1# Map"]:GetChildren()[930],
+    }
+}
+
+
+
+
+local args = {
+    [1] = "Change",
+    [2] = "Shiesty",
+    [3] = "Backpack",
+    [4] = workspace:WaitForChild("1# Map"):WaitForChild("Safe")
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Inventory"):FireServer(unpack(args))
+
+local args = {
+    [1] = "Change",
+    [2] = "Shiesty",
+    [3] = "Inv",
+    [4] = workspace:WaitForChild("1# Map"):WaitForChild("Safe")
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Inventory"):FireServer(unpack(args))
+
+
+]]--
+
+
+
+
+
+local MainTab = Window:CreateTab("Home", 4483362458)
+local MainSection = MainTab:CreateSection("Main")
+
+local TwitterTab = Window:CreateTab("Twitter", 4483362458)
+local TwitterSection = TwitterTab:CreateSection("Twitter")
+
+local BankTab = Window:CreateTab("Bank", 4483362458)
+local BankSection = BankTab:CreateSection("Bank")
+
+local TeleportsTab = Window:CreateTab("Teleports", 4483362458)
+local TeleportsSection = TeleportsTab:CreateSection("Teleports")
+
+local StoreTab = Window:CreateTab("Store", 4483362458)
+local StoreSection = StoreTab:CreateSection("Store")
+
+local VisibilityTab = Window:CreateTab("Visbility", 4483362458)
+local VisibiltySection = VisibilityTab:CreateSection("Visibility")
+
+local GUIsTab = Window:CreateTab("GUIs", 4483362458)
+local GUIsSection = GUIsTab:CreateSection("GUIs")
+
+local PlayerInfoTab = Window:CreateTab("Player Info", 4483362458)
+local PlayerInfoSection = PlayerInfoTab:CreateSection("Player Info")
+
+local FixesTab = Window:CreateTab("Fixes", 4483362458)
+local FixesSection = FixesTab:CreateSection("Fixes")
+
+Lighting = cloneref(game:GetService("Lighting"))
+
+local selectedPlayer = ""
+
+local graffitisHidden = false
+
+local selectedGUI = ""
+local selectedHiddenGUI = ""
+local selectedRemovedGUI = ""
+
+local autoHeal = false
+local autoHealAmount = 1
+local autoHealDelayMs = 100
+
+local autoTweet = false
+local autoTweetDelayMs = 100
+local tweetContent = ""
+
+local moneyAmount = 0
+local bankOption = "Deposit"
+
+local autoTweetInteraction = false
+local targetTweetNumber = 1
+local tweetOption = "Like"
+local autoLike = false
+local autoRetweet = false
+local autoTweetInteractionDelayMs = 100
+local tweetInteractionMode = true
+
+local selectedItem = ""
+
+local teleportTarget = ""
+
+-----[ MAIN TAB ]-----
+
+local HealAmountSlider = MainTab:CreateSlider({
+   Name = "Heal Amount",
+   Range = {1, 100},
+   Increment = 1,
+   Suffix = "hp",
+   CurrentValue = 1,
+   Flag = "healAmountSlider",
+   Callback = function(Value)
+            autoHealAmount = Value
+   end,
+})
+
+local AutoHealDelaySlider = MainTab:CreateSlider({
+   Name = "Auto Heal Delay",
+   Range = {1, 5000},
+   Increment = 25,
+   Suffix = "ms",
+   CurrentValue = 100,
+   Flag = "healDelaySlider",
+   Callback = function(Value)
+            autoHealDelayMs = Value
+   end,
+})
+
+local AutoHealToggle = MainTab:CreateToggle({
+   Name = "Toggle Auto Heal",
+   CurrentValue = false,
+   Flag = "autoSpamToggle",
+   Callback = function(Value)
+        autoSpam = Value
+        while autoSpam do
+            game:GetService("ReplicatedStorage"):WaitForChild("DamagePlayer"):InvokeServer(autoHealAmount * -1)
+            wait(autoHealDelayMs / 1000)
+        end
+   end,
+})
+
+-----[ TWITTER TAB ]-----
+
+local AutoTweetParagraph = TwitterTab:CreateParagraph({Title = "Auto Tweeting", Content = "Your message will be censored after if you send to fast, maybe choose like 2-5 second delays to avoid that."})
+
+local TwitterInput = TwitterTab:CreateInput({
+   Name = "Tweet Content",
+   PlaceholderText = "",
+   RemoveTextAfterFocusLost = false,
+   Callback = function(Text)
+            tweetContent = Text
+   end,
+})
+
+local TweetDelaySlider = TwitterTab:CreateSlider({
+   Name = "Auto Tweet Delay",
+   Range = {1, 5000},
+   Increment = 25,
+   Suffix = "ms",
+   CurrentValue = 100,
+   Flag = "delaySlider",
+   Callback = function(Value)
+            autoTweetDelayMs = Value
+   end,
+})
+
+local AutoTwitterToggle = TwitterTab:CreateToggle({
+   Name = "Toggle Auto Tweet",
+   CurrentValue = false,
+   Flag = "autoTweetToggle",
+   Callback = function(Value)
+        autoTweet = Value
+        while autoTweet do
+            game:GetService("ReplicatedStorage"):WaitForChild("Resources"):WaitForChild("#Phone"):WaitForChild("Main"):FireServer("Tweet", {"CreateTweet", tweetContent})
+            wait(autoTweetDelayMs / 1000)
+        end
+   end,
+})
+
+local TweetButton = TwitterTab:CreateButton({
+    Name = "Tweet Message",
+    Callback = function(Value)
+            game:GetService("ReplicatedStorage"):WaitForChild("Resources"):WaitForChild("#Phone"):WaitForChild("Main"):FireServer("Tweet", {"CreateTweet", tweetContent})
+    end,
+})
+
+local AutoTweetParagraph = TwitterTab:CreateParagraph({Title = "Twitter Botting", Content = "Your likes/reposts will not always be counted if you send them too fast."})
+
+
+local TweetNumberInput = TwitterTab:CreateInput({
+   Name = "Target Tweet Number",
+   PlaceholderText = "1",
+   RemoveTextAfterFocusLost = false,
+   Callback = function(Text)
+            targetTweetNumber = Text
+   end,
+})
+
+local TweetOptionDropdown = TwitterTab:CreateDropdown({
+   Name = "Select Twitter Action",
+   Options = {"Like","Repost","Both"},
+   CurrentOption = {"Like"},
+   MultipleOptions = false,
+   Flag = "selectTweetOption",
+   Callback = function(Option)
+            print("Bank option changed to: ".. Option[1])
+            tweetOption = Option[1]
+   end,
+})
+
+local TweetBotDelaySlider = TwitterTab:CreateSlider({
+   Name = "Auto Tweet Interaction Delay",
+   Range = {1, 5000},
+   Increment = 25,
+   Suffix = "ms",
+   CurrentValue = 100,
+   Flag = "tweetInteractionDelaySlider",
+   Callback = function(Value)
+            autoTweetInteractionDelayMs = Value
+   end,
+})
+
+local TweetInteractionModeToggle = TwitterTab:CreateToggle({
+   Name = "Decrease / Increase",
+   CurrentValue = true,
+   Flag = "autoTweetInteractionModeToggle",
+   Callback = function(Value)
+        tweetInteractionMode = Value
+   end,
+})
+
+local AutoTwitterBotToggle = TwitterTab:CreateToggle({
+   Name = "Toggle Auto Tweet Interaction",
+   CurrentValue = false,
+   Flag = "autoTweetInteractionToggle",
+   Callback = function(Value)
+        autoTweetInteraction = Value
+        while autoTweetInteraction do
+            if tweetOption == "Like" then
+                game:GetService("ReplicatedStorage"):WaitForChild("Resources"):WaitForChild("#Phone"):WaitForChild("Main"):FireServer("Tweet", {"Liked", tweetInteractionMode, targetTweetNumber})
+            elseif tweetOption == "Repost" then
+                game:GetService("ReplicatedStorage"):WaitForChild("Resources"):WaitForChild("#Phone"):WaitForChild("Main"):FireServer("Tweet", {"Repost", tweetInteractionMode, targetTweetNumber})
+            elseif tweetOption == "Both" then
+                game:GetService("ReplicatedStorage"):WaitForChild("Resources"):WaitForChild("#Phone"):WaitForChild("Main"):FireServer("Tweet", {"Liked", tweetInteractionMode, targetTweetNumber})
+                game:GetService("ReplicatedStorage"):WaitForChild("Resources"):WaitForChild("#Phone"):WaitForChild("Main"):FireServer("Tweet", {"Repost", tweetInteractionMode, targetTweetNumber})
+            else
+                print("Undefined tweet interactino option")
+            end
+            wait(autoTweetInteractionDelayMs / 1000)
+        end
+   end,
+})
+
+
+
+-----[ BANK TAB ]-----
+
+local MoneyAmountInput = BankTab:CreateInput({
+   Name = "Amount",
+   PlaceholderText = "",
+   RemoveTextAfterFocusLost = false,
+   Callback = function(Text)
+            moneyAmount = tonumber(Text)
+   end,
+})
+
+local BankOptionDropdown = BankTab:CreateDropdown({
+   Name = "Select Bank Action",
+   Options = {"Deposit","Withdraw","Drop"},
+   CurrentOption = {"Deposit"},
+   MultipleOptions = false,
+   Flag = "selectBankOption",
+   Callback = function(Option)
+            print("Bank option changed to: ".. Option[1])
+            bankOption = Option[1]
+   end,
+})
+
+local BankActionButton = BankTab:CreateButton({
+    Name = "Complete Transaction",
+    Callback = function(Value)
+            if bankOption == "Deposit" then
+                game:GetService("ReplicatedStorage"):WaitForChild("BankAction"):FireServer("depo", moneyAmount)
+            elseif bankOption == "Withdraw" then
+                game:GetService("ReplicatedStorage"):WaitForChild("BankAction"):FireServer("with", moneyAmount)
+            elseif bankOption == "Drop" then
+                game:GetService("ReplicatedStorage"):WaitForChild("BankProcessRemote"):InvokeServer("Drop", moneyAmount)
+            else
+                print("Undefined bank option")
+            end
+        end,
+})
+
+-----[ TELEPORTS TAB ]-----
+
+local TeleportTargetDropdown = TeleportsTab:CreateDropdown({
+   Name = "Select Destination",
+   Options = {"Bank","Laundromat","Sewers"},
+   CurrentOption = {"Bank"},
+   MultipleOptions = false,
+   Flag = "selectTeleportTarget",
+   Callback = function(Option)
+            print("Teleport destination changed to: ".. Option[1])
+            teleportTarget = Option[1]
+   end,
+})
+
+local TeleportButton = TeleportsTab:CreateButton({
+    Name = "Teleport",
+    Callback = function(Value)
+        -- some cframe shit idk
+        end,
+})
+
+-----[ STORE TAB ]-----
+
+local SelectItemDropdown = StoreTab:CreateDropdown({
+   Name = "Select Item",
+   Options = {"Seeds","Laundromat","Sewers"},
+   CurrentOption = {"Bank"},
+   MultipleOptions = false,
+   Flag = "selectTeleportTarget",
+   Callback = function(Option)
+            print("Selected store item changed to: ".. Option[1])
+            teleportTarget = Option[1]
+   end,
+})
+
+local BuyButton = StoreTab:CreateButton({
+    Name = "Buy Item",
+    Callback = function(Value)
+        -- buy the thing from the dropdown
+        end,
+})
+
+-----[ VISIBILITY TAB ]-----
+
+local FullbrightButton = VisibilityTab:CreateButton({
+    Name = "Fullbright",
+    Callback = function(Value)
+        Lighting.Brightness = 2
+    	Lighting.ClockTime = 14
+    	Lighting.FogEnd = 100000
+    	Lighting.GlobalShadows = false
+    	Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+        end,
+})
+
+local NofogButton = VisibilityTab:CreateButton({
+    Name = "No Fog",
+    Callback = function(Value)
+        Lighting.FogEnd = 100000
+        for i,v in pairs(Lighting:GetDescendants()) do
+            if v:IsA("Atmosphere") then
+                v:Destroy()
+            end
+        end
+        end,
+})
+
+local NoDepthOfFieldButton = VisibilityTab:CreateButton({
+    Name = "No Depth of Field",
+    Callback = function(Value)
+        game:GetService("Lighting").DepthOfField.Enabled = false
+        game:GetService("Lighting"):GetChildren()[232].Enabled = false
+        game:GetService("Lighting"):GetChildren()[14].Enabled = false
+        end,
+})
+
+local NoBlurButton = VisibilityTab:CreateButton({
+    Name = "No Blur",
+    Callback = function(Value)
+        game:GetService("Lighting"):GetChildren()[20].Enabled = false
+        game:GetService("Lighting").Blur.Enabled = false
+        game:GetService("Lighting").FBlur.Enabled = false
+        game:GetService("Lighting").EffectBLUR.Enabled = false
+        game:GetService("Lighting").GunHSBLUR.Enabled = false
+        game:GetService("Lighting").IntroBlur.Enabled = false
+        end,
+})
+
+local HideGraffitiToggle = VisibilityTab:CreateToggle({
+   Name = "Hide Graffitis",
+   CurrentValue = false,
+   Flag = "autoTweetInteractionToggle",
+   Callback = function(Value)
+        graffitisHidden = Value
+        
+   end,
+})
+
+-----[ GUIS TAB ]-----
+
+--[[
+
+game:GetService("Players").LocalPlayer.PlayerGui["Bronx CLOTHING"]
+game:GetService("Players").LocalPlayer.PlayerGui["Bronx LOCKER"]
+game:GetService("Players").LocalPlayer.PlayerGui["Bronx Market 2"]
+game:GetService("Players").LocalPlayer.PlayerGui["Bronx PAWNING"]
+game:GetService("Players").LocalPlayer.PlayerGui["Bronx TATTOOS"]
+game:GetService("Players").LocalPlayer.PlayerGui.Controls
+game:GetService("Players").LocalPlayer.PlayerGui.CopSirens
+game:GetService("Players").LocalPlayer.PlayerGui.Dead
+game:GetService("Players").LocalPlayer.PlayerGui.Enter
+game:GetService("Players").LocalPlayer.PlayerGui["Exotic Shop"]
+game:GetService("Players").LocalPlayer.PlayerGui.Flash
+
+]]--
+
+
+
+--[[
+
+game:GetService("Players").LocalPlayer.PlayerGui.Animations.Frame
+game:GetService("Players").LocalPlayer.PlayerGui.BagGui.Gui
+game:GetService("Players").LocalPlayer.PlayerGui.BailLists.Frame
+game:GetService("Players").LocalPlayer.PlayerGui.BasketMobile.Mobile
+game:GetService("Players").LocalPlayer.PlayerGui["Block Party"].Holder
+game:GetService("Players").LocalPlayer.PlayerGui["Bronx Radio"].Holder
+game:GetService("Players").LocalPlayer.PlayerGui["Bronx SUBSCRIPTIONS"].Frame
+game:GetService("Players").LocalPlayer.PlayerGui.ClansGui.Frame
+game:GetService("Players").LocalPlayer.PlayerGui.ClothingStore_1.Main
+game:GetService("Players").LocalPlayer.PlayerGui.ClothingStore_1.Confirm
+game:GetService("Players").LocalPlayer.PlayerGui.CraftGUI.Main
+game:GetService("Players").LocalPlayer.PlayerGui["FOLLOWER REWARDS"].Follow
+
+
+]]--
+
+
+local SelectGUIDropdown = GUIsTab:CreateDropdown({
+   Name = "Select GUI",
+   Options = {"gui1","gui2","gui3"},
+   CurrentOption = {"gui1"},
+   MultipleOptions = false,
+   Flag = "selectGUI",
+   Callback = function(Option)
+            print("Selected GUI changed to: ".. Option[1])
+            selectedGUI = Option[1]
+   end,
+})
+
+local ToggleGUIButton = GUIsTab:CreateButton({
+    Name = "Toggle GUI",
+    Callback = function(Value)
+            -- you just have to set the entire selectedGUI to enabled
+        end,
+})
+
+local SelectHiddenGUIDropdown = GUIsTab:CreateDropdown({
+   Name = "Select Hidden GUI",
+   Options = {"gui1","gui2","gui3"},
+   CurrentOption = {"gui1"},
+   MultipleOptions = false,
+   Flag = "selectHiddenGUI",
+   Callback = function(Option)
+            print("Selected Hidden GUI changed to: ".. Option[1])
+            selectedHiddenGUI = Option[1]
+   end,
+})
+
+local ToggleHiddenGUIButton = GUIsTab:CreateButton({
+    Name = "Toggle Hidden GUI",
+    Callback = function(Value)
+            -- you have to set a frame inside of the selectedHiddenGUI to visible
+        end,
+})
+
+local SelectRemovedGUIDropdown = GUIsTab:CreateDropdown({
+   Name = "Select Removed GUI",
+   Options = {"gui1","gui2","gui3"},
+   CurrentOption = {"gui1"},
+   MultipleOptions = false,
+   Flag = "selectRemovedGUI",
+   Callback = function(Option)
+            print("Selected Removed GUI changed to: ".. Option[1])
+            selectedRemovedGUI = Option[1]
+   end,
+})
+
+
+local ToggleRemovedGUIButton = GUIsTab:CreateButton({
+    Name = "Toggle Removed GUI",
+    Callback = function(Value)
+            -- you have to set a frame inside of the selectedRemovedGUI active + visible
+        end,
+})
+
+-----[ PLAYER INFO TAB ]-----
+
+local RefreshPlayerListButton = PlayerInfoTab:CreateButton({
+    Name = "Refresh Player List",
+    Callback = function(Value)
+            local playerList = {}
+            
+            --[[
+            for _, player in ipairs(Players:GetPlayers()) do
+                table.insert(playerList, player.Name)
+            end
+            ]]--
+            
+            PlayerListDropdown.Options = {"test321","gre3","s98hg"}
+        end,
+})
+
+PlayerListDropdown = PlayerInfoTab:CreateDropdown({
+   Name = "Select Player",
+   Options = {"player1","player2","player3"},
+   CurrentOption = {"player1"},
+   MultipleOptions = false,
+   Flag = "selectPlayerDropdown",
+   Callback = function(Option)
+            print("Changed selected player: ".. Option[1])
+            selectedPlayer = Option[1]
+   end,
+})
+
+local GetPlayerInfoButton = PlayerInfoTab:CreateButton({
+    Name = "Get Player Info",
+    Callback = function(Value)
+            SelectedPlayerLabel:Set("Selected Player: "..selectedPlayer)
+        end,
+})
+
+SelectedPlayerLabel = PlayerInfoTab:CreateLabel("Selected Player: "..selectedPlayer)
+
+-----[ FIXES TAB ]-----
