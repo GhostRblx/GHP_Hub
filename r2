@@ -1,5 +1,12 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+Rayfield:Notify({
+   Title = "Executoed",
+   Content = "Loading GHP Hub",
+   Duration = 6.5,
+   Image = 4483362458,
+})
+
 local Window = Rayfield:CreateWindow({
    Name = "GHP Hub",
    LoadingTitle = "GHP V1",
