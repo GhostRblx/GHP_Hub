@@ -153,6 +153,26 @@ Players.PlayerAdded:Connect(function(player)
     DrawTracer(player)
 end)
 
+local function isPlayerInLobby(player)
+    local character = player.Character
+    return character and character.Parent == game.Workspace.Lobby
+end
+
+local function reloadESP()
+    while true do
+        wait(20) -- Alle 20 Sekunden
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if not isPlayerInLobby(player) then
+                createESP(player) -- ESP nur für Gegner neu erstellen
+            end
+        end
+    end
+end
+
+-- Starte den ESP-Reload im Hintergrund
+spawn(reloadESP)
+
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 --health--
@@ -238,6 +258,25 @@ end
 Players.PlayerAdded:Connect(function(player)
     DrawHealthBar(player)
 end)
+local function isPlayerInLobby(player)
+    local character = player.Character
+    return character and character.Parent == game.Workspace.Lobby
+end
+
+local function reloadESP()
+    while true do
+        wait(20) -- Alle 20 Sekunden
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if not isPlayerInLobby(player) then
+                createESP(player) -- ESP nur für Gegner neu erstellen
+            end
+        end
+    end
+end
+
+-- Starte den ESP-Reload im Hintergrund
+spawn(reloadESP)
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -321,6 +360,25 @@ end
 Players.PlayerAdded:Connect(function(player)
     DrawNameESP(player)
 end)
+local function isPlayerInLobby(player)
+    local character = player.Character
+    return character and character.Parent == game.Workspace.Lobby
+end
+
+local function reloadESP()
+    while true do
+        wait(20) -- Alle 20 Sekunden
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if not isPlayerInLobby(player) then
+                createESP(player) -- ESP nur für Gegner neu erstellen
+            end
+        end
+    end
+end
+
+-- Starte den ESP-Reload im Hintergrund
+spawn(reloadESP)
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -408,6 +466,24 @@ end
 Players.PlayerAdded:Connect(function(player)
     DrawDistanceESP(player)
 end)
+local function isPlayerInLobby(player)
+    local character = player.Character
+    return character and character.Parent == game.Workspace.Lobby
+end
+
+local function reloadESP()
+    while true do
+        wait(20) -- Alle 20 Sekunden
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if not isPlayerInLobby(player) then
+                createESP(player) -- ESP nur für Gegner neu erstellen
+            end
+        end
+    end
+end
+
+-- Starte den ESP-Reload im Hintergrund
+spawn(reloadESP)
 
 ---------------------------------------------------------------------------------------
 local AESPS = ESPT:CreateSection("Advanced")
@@ -537,6 +613,26 @@ end
 Players.PlayerAdded:Connect(function(player)
     ApplyGlow(player)
 end)
+
+local function isPlayerInLobby(player)
+    local character = player.Character
+    return character and character.Parent == game.Workspace.Lobby
+end
+
+local function reloadESP()
+    while true do
+        wait(20) -- Alle 20 Sekunden
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if not isPlayerInLobby(player) then
+                createESP(player) -- ESP nur für Gegner neu erstellen
+            end
+        end
+    end
+end
+
+-- Starte den ESP-Reload im Hintergrund
+spawn(reloadESP)
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 -- Box ESP mit Farbauswahl & Rainbow-Modus (Feste Größe) --
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -658,7 +754,30 @@ end
 Players.PlayerAdded:Connect(function(player)
     CreateBox(player)
 end)
+
+local function isPlayerInLobby(player)
+    local character = player.Character
+    return character and character.Parent == game.Workspace.Lobby
+end
+
+local function reloadESP()
+    while true do
+        wait(20) -- Alle 20 Sekunden
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if not isPlayerInLobby(player) then
+                createESP(player) -- ESP nur für Gegner neu erstellen
+            end
+        end
+    end
+end
+
+-- Starte den ESP-Reload im Hintergrund
+spawn(reloadESP)
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--AimBot--
+--Fov--
 -- Services
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -806,7 +925,7 @@ local LockOnEnabled = false  -- Wird aktiviert, wenn MouseButton2 gedrückt wird
 
 -- UI Toggle für Aimbot
 local AimbotToggle = AimbotT:CreateToggle({
-    Name = "Aimbot",
+    Name = "Aimbot (not working)",
     CurrentValue = false,
     Flag = "AimbotToggle",
     Callback = function(Value)
