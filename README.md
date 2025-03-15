@@ -8,7 +8,6 @@ This repository contains the script loader for the GHP Hub, which allows you to 
     
     -Arsenal
     -A literal Baseplate
-    -RIVALS
     -Tha Bronx 2/3
     -Shoot People of a Map simulator
 
