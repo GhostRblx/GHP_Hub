@@ -10,6 +10,7 @@ This repository contains the script loader for the GHP Hub, which allows you to 
     -A literal Baseplate
     -Tha Bronx 2/3
     -Shoot People of a Map simulator
+    -RIVALS
 
 ## Loadstring
 
